@@ -6,6 +6,12 @@ interface User {
   gender: string;
   isDoc: boolean | null;
   createdAt: Date | null;
+  isUserLogged: boolean;
+  userToken: string | null;
 }
 
-export type { User };
+interface UserLogin {
+  token: string;
+}
+
+export type { User, UserLogin };

@@ -1,6 +1,18 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+  :root{
+    --light-blue: #007FFF;
+    --dark-blue: #17224D;
+    --white: #F5FAFA;
+    --light-green: #17E9E1;
+    --logo-blue: #337AB7;
+    --sub-text: #434343;
+    --background: #CFD8DC;
+
+    --font-maven: 'Maven Pro', sans-serif;
+    --font-mulish: 'Mulish', sans-serif;
+  } 
 
 body, div, ul, button, h1, p, img, h2, h3, nav, a {
     margin: 0;
@@ -19,9 +31,11 @@ body, div, ul, button, h1, p, img, h2, h3, nav, a {
 }
 
 html, body {
-    overflow: auto;
     height: 100vh;
+    overflow: hidden;
     display: block;
+
+    background-color: var(--background);
 }
 `;
 
