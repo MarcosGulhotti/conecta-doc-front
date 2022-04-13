@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/button";
 import { Header } from "../../components/header";
-import { StyledContainer } from "./style";
+import { NoScroll, StyledContainer } from "./style";
 
 const HomePage = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <Header />
+      <NoScroll>
+        <Header />
+      </NoScroll>
       <StyledContainer>
         <div>
           <p className="MainText">

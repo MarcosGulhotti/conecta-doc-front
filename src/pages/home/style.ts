@@ -3,12 +3,12 @@ import mainImage from "../../assets/mainImage.webp";
 
 const StyledContainer = styled.div`
   background: url(${mainImage}) no-repeat center center fixed;
-  min-height: 100vh;
+  height: 100vh;
   background-size: cover;
 
   display: flex;
   flex-direction: column;
-
+  
   p {
     margin-bottom: 15px;
     font-size: 28px;
@@ -86,4 +86,10 @@ const StyledContainer = styled.div`
   }
 `;
 
-export { StyledContainer };
+
+const NoScroll = styled.div`
+  width: 100%;
+  position: fixed;
+`
+
+export { StyledContainer, NoScroll };

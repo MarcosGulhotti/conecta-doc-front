@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     --logo-blue: #337AB7;
     --sub-text: #434343;
     --background: #CFD8DC;
+    --black: #000000
 
     --font-maven: 'Maven Pro', sans-serif;
     --font-mulish: 'Mulish', sans-serif;
@@ -30,13 +31,16 @@ body, div, ul, button, h1, p, img, h2, h3, nav, a {
 
 }
 
-html, body {
+body {
+    overflow: auto;
     height: 100vh;
-    overflow: hidden;
     display: block;
-
     background-color: var(--background);
 }
+#root {
+    height: 100%;
+  }
+
 `;
 
 export default GlobalStyle;

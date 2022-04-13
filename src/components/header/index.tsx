@@ -20,7 +20,7 @@ export const Header = () => {
             <p onClick={() => navigateTo("/dashboard")}>Agendamentos</p>
           </li>
           <li>
-            <p onClick={() => navigateTo("/schedules")}>Consultas</p>
+            <p onClick={() => navigateTo("/schedules")}>Calendario</p>
           </li>
           <li onClick={() => navigateTo("/login")} className="LoginLi">
             <p onClick={() => navigateTo("/login")}>Entrar</p>{" "}

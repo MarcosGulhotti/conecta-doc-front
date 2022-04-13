@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 const StyledContainer = styled.div`
   width: 100%;
-  height: 130px;
+  height: 145px;
   background-color: var(--white);
   display: flex;
   flex-direction: column;
 
   @media (min-width: 410px) {
-    height: 100px;
+    height: 110px;
   }
 
   @media (min-width: 1000px) {
@@ -43,7 +43,7 @@ const StyledNavigationContainer = styled.div`
       margin: 10px;
       cursor: pointer;
       p {
-        font-size: 18px;
+        font-size: 17px;
         font-family: var(--font-mulish);
       }
     }

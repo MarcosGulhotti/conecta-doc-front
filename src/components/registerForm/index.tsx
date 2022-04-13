@@ -103,7 +103,7 @@ export const RegisterForm = () => {
           icon="fa-solid fa-user"
           placeholder="Digite seu genero"
           select
-          selectValues={["Masculino", "Feminino", "Transgênero", "Não binário"]}
+          selectValues={["Masculino", "Feminino", "Não binário"]}
         />
         <p>
           Já possui uma conta? Entre{" "}
