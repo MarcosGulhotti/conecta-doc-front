@@ -1,13 +1,5 @@
-import { User } from "../../store/types/userTypes";
+import { Treatements } from "../../types";
 import { StyledCardsContainer, StyledContainer, StyledDateContainer, StyledInfosContainer } from "./style";
-
-interface Treatements {
-    id: string;
-    user: User;
-    doctor: User;
-    status: string;
-    schedule: string;
-}
 
 export const TreatementCard = (data: Treatements) => {
 

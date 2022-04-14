@@ -4,15 +4,8 @@ import { IndicatorCard } from "../../components/indicatorCard"
 import { TreatementCard } from "../../components/treatementCard"
 import api from "../../services/api"
 import { User } from "../../store/types/userTypes"
+import { Treatements } from "../../types"
 import { DivisorDiv, FixInScreen, PatientsContainer, StyledContainer } from "./style"
-
-interface Treatements {
-    id: string;
-    user: User;
-    doctor: User;
-    status: string;
-    schedule: string;
-}
 
 const DashboardPage = () => {
 

@@ -28,7 +28,7 @@ const StyledContainer = styled.div`
     justify-content: space-around;
     flex-direction: row;
 
-    margin-top: 100px;
+    /* margin-top: 100px; */
 
     h1 {
       display: block;
@@ -47,14 +47,18 @@ const DivisorDiv = styled.div`
 `;
 
 const PatientsContainer = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction:column;
   align-items: center;
   margin-top: 30px;
-  max-height: 100%;
+  max-height: 500px;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   @media (min-width: 768px){
+    width: 80%;
     display: flex;
     flex-direction:row;
     flex-wrap: wrap;

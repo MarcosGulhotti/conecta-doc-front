@@ -56,7 +56,7 @@ const StyledCardsContainer = styled.div`
     
     div{
         @media (min-width: 425px){
-        width: 100px;
+        width: 90px;
         }
         width: 80px;
         height: 30px;
