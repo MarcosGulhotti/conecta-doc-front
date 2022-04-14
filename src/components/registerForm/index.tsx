@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { setUser } from "../../store/slices/userSlice";
 import { StyledContainer } from "./style";
-import logo from "../../assets/svgs/logo.svg";
+import toast from "react-hot-toast";
 
 interface User {
   id: string;
@@ -32,7 +32,7 @@ export const RegisterForm = () => {
   const [isDoc, setIsDoc] = useState(true);
 
   const schema = yup.object().shape({
-    email: yup.string().required().email(),
+    email: yup.string().required().email("Por favor adicione um email válido"),
     password: yup.string().required(),
     name: yup.string().required(),
     age: yup.number().required(),
@@ -68,8 +68,8 @@ export const RegisterForm = () => {
 
       navigate("/login");
     } catch (error) {
-      console.log(error);
-      // reset();
+      toast.error("Algo deu errado na criação do usuário");
+      reset();
     }
   };
 
@@ -77,39 +77,21 @@ export const RegisterForm = () => {
     <StyledContainer>
       {/* <img src={logo} alt="Logo" onClick={() => navigate("/")} /> */}
       <form onSubmit={handleSubmit(handleSubmitFunction)}>
-        <Input
-          register={register("email")}
-          icon="fa-solid fa-envelope"
-          placeholder="Digite seu email"
-        />
-        <Input
-          type="password"
-          register={register("password")}
-          icon="fa-solid fa-key"
-          placeholder="Digite sua senha"
-        />
-        <Input
-          register={register("name")}
-          icon="fa-solid fa-user"
-          placeholder="Digite seu nome"
-        />
-        <Input
-          register={register("age")}
-          icon="fa-solid fa-id-card"
-          placeholder="Digite sua idade"
-        />
+        <Input register={register("email")} icon="fa-solid fa-envelope" placeholder="Digite seu email" />
+        <Input type="password" register={register("password")} icon="fa-solid fa-key" placeholder="Digite sua senha" />
+        <Input register={register("name")} icon="fa-solid fa-user" placeholder="Digite seu nome" />
+        <Input register={register("age")} icon="fa-solid fa-id-card" placeholder="Digite sua idade" />
         <Input
           register={register("gender")}
           icon="fa-solid fa-user"
           placeholder="Digite seu genero"
           select
-          selectValues={["Masculino", "Feminino", "Não binário"]}
+          selectValues={["Masculino", "Feminino", "Não binário", "Outro"]}
         />
         <p>
-          Já possui uma conta? Entre{" "}
-          <span onClick={() => navigate("/login")}>aqui</span>
+          Já possui uma conta? Entre <span onClick={() => navigate("/login")}>aqui</span>
         </p>
-        <Button text="Enviar" type="submit" height="45px" width="250px" />
+        <Button animated={false} text="Enviar" type="submit" height="45px" width="250px" />
       </form>
     </StyledContainer>
   );

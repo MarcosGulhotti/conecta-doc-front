@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledButton = styled.button<{ width: string; height: string }>`
+const StyledButton = styled.button<{ width: string; height: string; animated: boolean }>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
 
@@ -16,7 +16,7 @@ const StyledButton = styled.button<{ width: string; height: string }>`
   align-items: center;
   justify-content: space-around;
 
-  animation: go-forward 1.5s;
+  animation: ${(props) => props.animated && "go-forward 1.5s"};
 
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 

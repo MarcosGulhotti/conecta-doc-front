@@ -9,17 +9,10 @@ interface InputProps {
   type?: string;
   select?: boolean;
   selectValues?: Array<string>;
+  presentation?: string;
 }
 
-export const Input = ({
-  type,
-  register,
-  icon,
-  placeholder,
-  select,
-  selectValues,
-  ...rest
-}: InputProps) => {
+export const Input = ({ type, register, icon, placeholder, select, selectValues, presentation, ...rest }: InputProps) => {
   const divElementRef = useRef<HTMLDivElement | null>(null);
 
   function onDivClick() {
@@ -33,10 +26,13 @@ export const Input = ({
       <i className={icon} />
       {select ? (
         <select {...register} placeholder={placeholder} {...rest}>
-          <option value={undefined}>Qual genero você se identica?</option>
-          {selectValues
-            ? selectValues.map((elm, i) => <option key={i} value={elm}>{elm}</option>)
-            : null}
+          <option value={undefined}>{presentation ? presentation : "Qual genero você se identica?"}</option>
+          {selectValues &&
+            selectValues.map((elm, i) => (
+              <option key={i} value={elm}>
+                {elm}
+              </option>
+            ))}
         </select>
       ) : (
         <input type={type} {...register} placeholder={placeholder} {...rest} />

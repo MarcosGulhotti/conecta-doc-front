@@ -1,88 +1,120 @@
 import { useEffect, useState } from "react";
-import { Header } from "../../components/header"
-import { TreatementCard } from "../../components/treatementCard";
+import { Header } from "../../components/header";
+import { AppointmentsCard } from "../../components/appointmentCard";
 import api from "../../services/api";
-import { User } from "../../store/types/userTypes";
 import { FixInRightSide, FixInScreen, PatientsContainer } from "./style";
-import { getWeekOfMonth, isWeekend, endOfWeek, endOfMonth, getDaysInMonth } from 'date-fns'
+import { getWeekOfMonth, isWeekend } from "date-fns";
 import { sortTreatmentsMonth, sortTreatmentsWeek } from "./utils";
-import { Treatements } from "../../types";
+import { appointments } from "../../types";
 import { SwitchButton } from "../../components/switchButton";
 import { Button } from "../../components/button";
+import Modal from "react-modal";
+import { CreateScheduleCard } from "../../components/createScheduleCard";
+import { useNavigate } from "react-router-dom";
+import noData from "../../assets/svgs/noData.svg";
+
+const customStyles = {
+  content: {
+    width: "100vw",
+    height: "100vh",
+    background: "rgba(0, 0, 0, 0.5)",
+    margin: 0,
+    padding: 0,
+    top: 0,
+    left: 0,
+    border: "none",
+    borderRadius: 0,
+  },
+};
 
 const SchedulePage = () => {
-    const token = localStorage.getItem("token") || "null"
+  const token = localStorage.getItem("token") || null;
 
+  const [appointmentsMonth, setAppointmentsMonth] = useState<Array<appointments>>([]);
+  const [appointmentsWeek, setAppointmentsWeek] = useState<Array<appointments>>([]);
 
-    const [treatementsMonth, setTreatementsMonth] = useState<Array<Treatements>>([])
-    const [treatementsWeek, setTreatementsWeek] = useState<Array<Treatements>>([])
+  const navigate = useNavigate();
 
-    const [monthView, setMonthView] = useState<boolean>(true)
+  const [monthView, setMonthView] = useState<boolean>(true);
+  const [modal, setModal] = useState<boolean>(false);
 
-    useEffect(() => {
-        const getTreatments = async () => {
-            const req = await api.get("/doctor/patients/all", {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Authorization": `Bearer: ${token}`
-                }
-            })
+  const getTreatments = async () => {
+    const req = await api.get("/doctor/patients/all", {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer: ${token}`,
+      },
+    });
 
-            const allTreatementsMonth: Array<Treatements> = []
-            const allTreatementsWeek: Array<Treatements> = []
+    const allappointmentsMonth: Array<appointments> = [];
+    const allappointmentsWeek: Array<appointments> = [];
 
-            const date = new Date().toISOString().split("T")[0]
+    const date = new Date().toISOString().split("T")[0];
 
-            req.data.forEach((elm: Treatements) => {
+    req.data.forEach((elm: appointments) => {
+      const Week = new Date(elm.schedule).toISOString().split("T")[0];
 
-                if (elm.status === "Agendado" && new Date(elm.schedule).toISOString().split("T")[0].split("-")[1] === date.split("-")[1]) {
-                    allTreatementsMonth.push(elm)
-                }
+      if (elm.status === "Agendado" && new Date(elm.schedule).toISOString().split("T")[0].split("-")[1] === date.split("-")[1]) {
+        allappointmentsMonth.push(elm);
+      }
 
-            }
+      if (elm.status === "Agendado" && Week.split("-")[1] === date.split("-")[1] && getWeekOfMonth(new Date(Week)) === getWeekOfMonth(new Date(date))) {
+        allappointmentsWeek.push(elm);
+      }
+    });
+
+    const sortedTreatmentsWeek = sortTreatmentsWeek(allappointmentsWeek);
+
+    const sortedTreatmentsMonth = sortTreatmentsMonth(allappointmentsMonth);
+
+    setAppointmentsMonth(sortedTreatmentsMonth);
+    setAppointmentsWeek(sortedTreatmentsWeek);
+  };
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+    getTreatments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modal, token, monthView]);
+
+  return (
+    <div>
+      <Header />
+      <FixInRightSide>
+        <SwitchButton
+          monthOrWeek={monthView}
+          textButtonLeft="Semanal"
+          textButtonRight="Mensal"
+          funcButtonLeft={() => setMonthView(false)}
+          funcButtonRight={() => setMonthView(true)}
+        />
+      </FixInRightSide>
+      <FixInScreen>
+        <PatientsContainer>
+          {monthView ? (
+            appointmentsMonth === [] ? (
+              <img src={noData} alt="No Data Image" />
+            ) : (
+              appointmentsMonth.map((elm, i) => <AppointmentsCard key={i} {...elm} />)
             )
-
-
-            req.data.forEach((elm: Treatements) => {
-                const Week = new Date(elm.schedule).toISOString().split("T")[0]
-
-                if (elm.status === "Agendado" && Week.split("-")[1] === date.split("-")[1] && getWeekOfMonth(new Date(Week)) === getWeekOfMonth(new Date(date))) {
-                    if (!isWeekend(new Date(Week))) {
-                        allTreatementsWeek.push(elm)
-                    }
-                }
-            }
-            )
-
-            const sortedTreatmentsWeek = sortTreatmentsWeek(allTreatementsWeek)
-
-            const sortedTreatmentsMonth = sortTreatmentsMonth(allTreatementsMonth)
-
-            setTreatementsMonth(sortedTreatmentsMonth)
-            setTreatementsWeek(sortedTreatmentsWeek)
-        }
-        getTreatments()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-
-
-    return (
-        <div>
-            <Header />
-            <FixInRightSide>
-                <SwitchButton monthOrWeek={monthView} textButtonLeft="Semanal" textButtonRight="Mensal" funcButtonLeft={() => setMonthView(false)} funcButtonRight={() => setMonthView(true)} />
-            </FixInRightSide>
-            <FixInScreen>
-                <PatientsContainer>
-                    {monthView ? treatementsMonth.map((elm, i) => <TreatementCard key={i} {...elm} />) : treatementsWeek.map((elm, i) => <TreatementCard key={i} {...elm} />)}
-                </PatientsContainer>
-            </FixInScreen>
-            <FixInRightSide>
-                <Button type="button" width="250px" height="55px" func={() => null} text="Criar nova consulta" />
-            </FixInRightSide>
-        </div>
-    )
-}
+          ) : appointmentsWeek === [] ? (
+            <img src={noData} alt="No Data Image" />
+          ) : (
+            appointmentsWeek.map((elm, i) => <AppointmentsCard key={i} {...elm} />)
+          )}
+        </PatientsContainer>
+      </FixInScreen>
+      <FixInRightSide>
+        <Button animated={false} type="button" width="250px" height="55px" func={() => setModal(true)} text="Criar nova consulta" />
+      </FixInRightSide>
+      {modal && (
+        <Modal ariaHideApp={false} isOpen={modal} onRequestClose={() => setModal(false)} style={customStyles}>
+          <CreateScheduleCard closeModal={() => setModal(false)} />
+        </Modal>
+      )}
+    </div>
+  );
+};
 
 export default SchedulePage;

@@ -8,14 +8,14 @@ const StyledContainer = styled.div`
   margin-top: 50px;
 
   h1 {
-      display: none;
+    display: none;
   }
 
   @media (min-width: 768px) {
     align-items: center;
     justify-content: space-around;
     flex-direction: row;
-    h1{
+    h1 {
       display: block;
       font-family: var(--font-mulish);
       font-size: 20px;
@@ -49,7 +49,7 @@ const DivisorDiv = styled.div`
 const PatientsContainer = styled.div`
   width: 100%;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
   margin-top: 30px;
   max-height: 500px;
@@ -57,20 +57,20 @@ const PatientsContainer = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
 
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     width: 80%;
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
   }
-`
+`;
 
 const FixInScreen = styled.div`
   display: flex;
   justify-content: center;
 
   width: 100%;
-`
+`;
 
 export { StyledContainer, DivisorDiv, PatientsContainer, FixInScreen };

@@ -8,7 +8,7 @@ const StyledContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  
+
   p {
     margin-bottom: 15px;
     font-size: 28px;
@@ -86,10 +86,9 @@ const StyledContainer = styled.div`
   }
 `;
 
-
 const NoScroll = styled.div`
   width: 100%;
   position: fixed;
-`
+`;
 
 export { StyledContainer, NoScroll };

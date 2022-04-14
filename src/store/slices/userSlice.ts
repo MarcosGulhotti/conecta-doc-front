@@ -1,5 +1,5 @@
 /* eslint-disable no-empty-pattern */
-import { User, UserLogin } from "../types/userTypes";
+import { User } from "../types/userTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "..";
 
@@ -11,8 +11,6 @@ const initialState: User = {
   isDoc: null,
   createdAt: null,
   id: "",
-  isUserLogged: false,
-  userToken: "",
 };
 
 export const userSlice = createSlice({
@@ -28,17 +26,10 @@ export const userSlice = createSlice({
       state.createdAt = action.payload.createdAt;
       state.id = action.payload.id;
     },
-    loginUser: (state, action: PayloadAction<UserLogin>) => {
-      state.isUserLogged = true;
-      state.userToken = action.payload.token;
-    },
-    logoutUser: (state, action: PayloadAction<UserLogin>) => {
-      state = initialState;
-    },
   },
 });
 
-export const { setUser, loginUser, logoutUser } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.userSlice;
 

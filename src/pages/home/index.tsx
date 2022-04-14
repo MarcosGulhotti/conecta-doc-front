@@ -20,17 +20,8 @@ const HomePage = () => {
             </span>
             todos se preocupam com a sua saúde.
           </p>
-          <p className="SubText">
-            Encontre profissionais de saúde de forma rápida, segura e confiável.
-          </p>
-          <Button
-            type="button"
-            height="55px"
-            width="200px"
-            text="Agendar"
-            func={() => navigate("schedules")}
-            details
-          />
+          <p className="SubText">Encontre profissionais de saúde de forma rápida, segura e confiável.</p>
+          <Button animated type="button" height="55px" width="200px" text="Agendar" func={() => navigate("schedules")} details />
         </div>
       </StyledContainer>
     </>

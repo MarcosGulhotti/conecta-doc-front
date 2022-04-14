@@ -41,6 +41,20 @@ body {
     height: 100%;
   }
 
+::-webkit-scrollbar {
+  width: 12px;              
+};
+
+::-webkit-scrollbar-track {
+  background-color: #F5FAFA;
+  border-radius: 10px;
+};
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--light-blue);    
+  border-radius: 10px;
+};
+
 `;
 
 export default GlobalStyle;

@@ -3,29 +3,52 @@ import { StyledContainer, StyledNavigationContainer } from "./style";
 import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
+  const token = localStorage.getItem("token") || null;
+
   const navigate = useNavigate();
-  const navigateTo = (path: string) => {
-    navigate(path);
+
+  const logOut = () => {
+    localStorage.clear();
+    navigate("/");
   };
 
   return (
     <StyledContainer>
-      <img onClick={() => navigateTo("/")} src={logo} alt="Logo" />
+      <img onClick={() => navigate("/")} src={logo} alt="Logo" />
       <StyledNavigationContainer>
         <ul>
           <li>
-            <p onClick={() => navigateTo("/")}>Início</p>
+            <p onClick={() => navigate("/")}>Início</p>
           </li>
           <li>
-            <p onClick={() => navigateTo("/dashboard")}>Agendamentos</p>
+            <p onClick={() => navigate("/dashboard")}>Agendamentos</p>
           </li>
           <li>
-            <p onClick={() => navigateTo("/schedules")}>Calendario</p>
+            <p onClick={() => navigate("/schedules")}>Calendario</p>
           </li>
-          <li onClick={() => navigateTo("/login")} className="LoginLi">
-            <p onClick={() => navigateTo("/login")}>Entrar</p>{" "}
+          <li
+            onClick={() => {
+              {
+                token ? logOut() : navigate("/login");
+              }
+            }}
+            className="LoginLi"
+          >
+            <p
+              onClick={() => {
+                {
+                  token ? logOut() : navigate("/login");
+                }
+              }}
+            >
+              {token ? "Sair" : "Entrar"}
+            </p>{" "}
             <i
-              onClick={() => navigateTo("/login")}
+              onClick={() => {
+                {
+                  token ? logOut() : navigate("/login");
+                }
+              }}
               className="fa-solid fa-arrow-right-to-bracket"
             ></i>
           </li>
