@@ -6,6 +6,7 @@ import api from "../../services/api";
 import { appointments } from "../../types";
 import { DivisorDiv, FixInScreen, PatientsContainer, StyledContainer } from "./style";
 import { useNavigate } from "react-router-dom";
+import noData from "../../assets/svgs/noData.svg";
 
 const DashboardPage = () => {
   const token = localStorage.getItem("token") || null;
@@ -50,6 +51,8 @@ const DashboardPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
+  console.log(treatements);
+
   return (
     <div>
       <Header />
@@ -61,9 +64,15 @@ const DashboardPage = () => {
       <DivisorDiv />
       <FixInScreen>
         <PatientsContainer>
-          {treatements.map((elm, i) => (
-            <AppointmentsCard refreshAppointments={() => getTreatments()} key={i} data={elm} />
-          ))}
+          {treatements.length === 0 ? (
+            <img src={noData} alt="No Data Image" />
+          ) : (
+            <>
+              {treatements.map((elm, i) => (
+                <AppointmentsCard refreshAppointments={() => getTreatments()} key={i} data={elm} />
+              ))}
+            </>
+          )}
         </PatientsContainer>
       </FixInScreen>
     </div>

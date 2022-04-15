@@ -69,7 +69,6 @@ export const PatientExists = ({ closeModal, closeMainModal }: CloseModal) => {
       closeModal();
     } catch (error) {
       toast.error("Usuário não existe");
-      // reset();
     }
   };
 

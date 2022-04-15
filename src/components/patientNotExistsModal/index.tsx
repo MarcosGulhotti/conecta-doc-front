@@ -36,7 +36,6 @@ export const PatienteNotExistsModal = ({ closeModal, closeMainModal }: CloseModa
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<CreatePatient>({
     resolver: yupResolver(schema),
   });
@@ -68,8 +67,7 @@ export const PatienteNotExistsModal = ({ closeModal, closeMainModal }: CloseModa
 
       closeModal();
     } catch (error) {
-      // toast.error("Algo deu errado com o agendamento da consulta");
-      // reset();
+      toast.error("Algo deu errado com o agendamento da consulta");
     }
   };
   return (

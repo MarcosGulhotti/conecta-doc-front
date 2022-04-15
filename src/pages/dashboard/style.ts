@@ -28,8 +28,6 @@ const StyledContainer = styled.div`
     justify-content: space-around;
     flex-direction: row;
 
-    /* margin-top: 100px; */
-
     h1 {
       display: block;
       font-family: var(--font-mulish);
@@ -56,6 +54,10 @@ const PatientsContainer = styled.div`
 
   overflow-y: scroll;
   overflow-x: hidden;
+
+  img {
+    width: 360px;
+  }
 
   @media (min-width: 768px) {
     width: 80%;

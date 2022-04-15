@@ -26,9 +26,7 @@ export const RegisterForm = () => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  //   const {} = useAppSelector((state) => state.userSlice);
 
-  const [errorModal, setErrorModal] = useState(false);
   const [isDoc, setIsDoc] = useState(true);
 
   const schema = yup.object().shape({
@@ -75,7 +73,6 @@ export const RegisterForm = () => {
 
   return (
     <StyledContainer>
-      {/* <img src={logo} alt="Logo" onClick={() => navigate("/")} /> */}
       <form onSubmit={handleSubmit(handleSubmitFunction)}>
         <Input register={register("email")} icon="fa-solid fa-envelope" placeholder="Digite seu email" />
         <Input type="password" register={register("password")} icon="fa-solid fa-key" placeholder="Digite sua senha" />

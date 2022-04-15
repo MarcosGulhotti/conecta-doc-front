@@ -22,9 +22,9 @@ const PatientsContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    align-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
     max-height: 450px;
     height: 450px;
   }

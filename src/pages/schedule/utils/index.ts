@@ -2,12 +2,10 @@ import { endOfMonth, getDaysInMonth } from "date-fns";
 import { appointments } from "../../../types";
 
 const sortTreatmentsMonth = (appointments: Array<appointments>) => {
-  const output: any = [];
-  let dayEndOfMonth;
-  let nextMonth;
+  const output: any[] = [];
+
   appointments.forEach((elm) => {
-    dayEndOfMonth = endOfMonth(new Date()).toISOString().split("T")[0].split("-")[2];
-    nextMonth = endOfMonth(new Date()).toISOString().split("T")[0].split("-")[1];
+    const nextMonth = endOfMonth(new Date()).toISOString().split("T")[0].split("-")[1];
 
     const day = new Date(elm.schedule).toISOString().split("T")[0].split("-")[2];
     const month = new Date(elm.schedule).toISOString().split("T")[0].split("-")[1];
@@ -16,7 +14,7 @@ const sortTreatmentsMonth = (appointments: Array<appointments>) => {
 
     if (Number(month) !== Number(nextMonth)) {
       if (Number(day) <= totalOfDaysInMonth) {
-        let sort: Array<appointments> = appointments.sort(
+        let sort = appointments.sort(
           (a, b) =>
             Number(new Date(a.schedule).toISOString().split("T")[0].split("-")[2]) - Number(new Date(b.schedule).toISOString().split("T")[0].split("-")[2])
         );

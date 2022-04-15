@@ -21,8 +21,6 @@ export const LoginForm = () => {
 
   const dispatch = useAppDispatch();
 
-  // const [errorModal, setErrorModal] = useState(false);
-
   const schema = yup.object().shape({
     email: yup.string().required().email(),
     password: yup.string().required(),
@@ -32,7 +30,6 @@ export const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<UserLogin>({
     resolver: yupResolver(schema),
   });

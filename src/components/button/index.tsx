@@ -7,7 +7,7 @@ interface ButtonProps {
   width: string;
   height: string;
   type: "button" | "submit" | "reset";
-  animated: boolean
+  animated: boolean;
 }
 
 export const Button = ({ text, func, details, width, height, type, animated }: ButtonProps) => {

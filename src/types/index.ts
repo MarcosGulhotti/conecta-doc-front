@@ -6,8 +6,6 @@ interface User {
   gender: string;
   isDoc: boolean | null;
   createdAt: Date | null;
-  isUserLogged: boolean;
-  userToken: string | null;
 }
 
 interface appointments {

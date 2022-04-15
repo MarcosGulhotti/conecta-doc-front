@@ -3,7 +3,7 @@ import { Header } from "../../components/header";
 import { AppointmentsCard } from "../../components/appointmentCard";
 import api from "../../services/api";
 import { FixInRightSide, FixInScreen, PatientsContainer } from "./style";
-import { getWeekOfMonth, isWeekend } from "date-fns";
+import { getWeekOfMonth } from "date-fns";
 import { sortTreatmentsMonth, sortTreatmentsWeek } from "./utils";
 import { appointments } from "../../types";
 import { SwitchButton } from "../../components/switchButton";
@@ -29,11 +29,10 @@ const customStyles = {
 
 const SchedulePage = () => {
   const token = localStorage.getItem("token") || null;
+  const navigate = useNavigate();
 
   const [appointmentsMonth, setAppointmentsMonth] = useState<Array<appointments>>([]);
   const [appointmentsWeek, setAppointmentsWeek] = useState<Array<appointments>>([]);
-
-  const navigate = useNavigate();
 
   const [monthView, setMonthView] = useState<boolean>(true);
   const [modal, setModal] = useState<boolean>(false);
@@ -46,8 +45,8 @@ const SchedulePage = () => {
       },
     });
 
-    const allappointmentsMonth: Array<appointments> = [];
-    const allappointmentsWeek: Array<appointments> = [];
+    const allAppointmentsMonth: Array<appointments> = [];
+    const allAppointmentsWeek: Array<appointments> = [];
 
     const date = new Date().toISOString().split("T")[0];
 
@@ -55,17 +54,17 @@ const SchedulePage = () => {
       const Week = new Date(elm.schedule).toISOString().split("T")[0];
 
       if (elm.status === "Agendado" && new Date(elm.schedule).toISOString().split("T")[0].split("-")[1] === date.split("-")[1]) {
-        allappointmentsMonth.push(elm);
+        allAppointmentsMonth.push(elm);
       }
 
       if (elm.status === "Agendado" && Week.split("-")[1] === date.split("-")[1] && getWeekOfMonth(new Date(Week)) === getWeekOfMonth(new Date(date))) {
-        allappointmentsWeek.push(elm);
+        allAppointmentsWeek.push(elm);
       }
     });
 
-    const sortedTreatmentsWeek = sortTreatmentsWeek(allappointmentsWeek);
+    const sortedTreatmentsWeek = sortTreatmentsWeek(allAppointmentsWeek);
 
-    const sortedTreatmentsMonth = sortTreatmentsMonth(allappointmentsMonth);
+    const sortedTreatmentsMonth = sortTreatmentsMonth(allAppointmentsMonth);
 
     setAppointmentsMonth(sortedTreatmentsMonth);
     setAppointmentsWeek(sortedTreatmentsWeek);
@@ -93,12 +92,12 @@ const SchedulePage = () => {
       <FixInScreen>
         <PatientsContainer>
           {monthView ? (
-            appointmentsMonth === [] ? (
+            appointmentsMonth === undefined ? (
               <img src={noData} alt="No Data Image" />
             ) : (
               appointmentsMonth.map((elm, i) => <AppointmentsCard refreshAppointments={() => getTreatments()} key={i} data={elm} />)
             )
-          ) : appointmentsWeek === [] ? (
+          ) : appointmentsWeek === undefined ? (
             <img src={noData} alt="No Data Image" />
           ) : (
             appointmentsWeek.map((elm, i) => <AppointmentsCard refreshAppointments={() => getTreatments()} key={i} data={elm} />)
