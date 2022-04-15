@@ -97,7 +97,7 @@ const SchedulePage = () => {
             ) : (
               appointmentsMonth.map((elm, i) => <AppointmentsCard refreshAppointments={() => getTreatments()} key={i} data={elm} />)
             )
-          ) : appointmentsWeek === undefined ? (
+          ) : appointmentsWeek.length === 0 ? (
             <img src={noData} alt="No Data Image" />
           ) : (
             appointmentsWeek.map((elm, i) => <AppointmentsCard refreshAppointments={() => getTreatments()} key={i} data={elm} />)

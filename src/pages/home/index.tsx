@@ -16,7 +16,7 @@ const HomePage = () => {
           <p className="MainText">
             Aqui na{" "}
             <span>
-              Connecta<span className="Doc">Doc</span>,
+              Conecta<span className="Doc">Doc</span>,
             </span>
             todos se preocupam com a sua saúde.
           </p>
