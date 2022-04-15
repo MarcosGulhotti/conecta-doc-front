@@ -1,4 +1,4 @@
-# Projeto feito para teste tecnico na ConnectaDoc
+# Projeto feito para teste tecnico na ConectaDoc
 
 Esse projeto tem como objetivo ser uma plataforma para medicos, onde se cadastram e pode gerenciar uma agenda básica.
 
