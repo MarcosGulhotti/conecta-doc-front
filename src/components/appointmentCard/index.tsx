@@ -1,10 +1,16 @@
+import toast from "react-hot-toast";
+import api from "../../services/api";
 import { appointments } from "../../types";
 import { StyledCardsContainer, StyledContainer, StyledDateContainer, StyledInfosContainer } from "./style";
-import { isMonday, isTuesday, isWednesday, isThursday, isFriday, isSaturday, format } from "date-fns";
-import pt from "date-fns/locale/pt-BR";
-import { formatInTimeZone, zonedTimeToUtc } from "date-fns-tz";
 
-export const AppointmentsCard = (data: appointments) => {
+interface AppointmentCardProps {
+  data: appointments;
+  refreshAppointments: () => void;
+}
+
+export const AppointmentsCard = ({ data, refreshAppointments }: AppointmentCardProps) => {
+  const token = localStorage.getItem("token") || null;
+
   const formDate = (date: string) => {
     const formatedDate = new Date(date).toISOString().split("T")[0];
 
@@ -16,6 +22,23 @@ export const AppointmentsCard = (data: appointments) => {
 
     return output;
   };
+
+  const cancelSchedule = async () => {
+    await api.patch(
+      `/schedule/${data.id}/cancel`,
+      {},
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer: ${token}`,
+        },
+      }
+    );
+
+    toast.success("Atendimento cancelado com sucesso!.");
+    refreshAppointments();
+  };
+
   return (
     <StyledContainer>
       <StyledDateContainer>
@@ -28,6 +51,7 @@ export const AppointmentsCard = (data: appointments) => {
           <div>{data.user.age} Anos</div>
         </StyledCardsContainer>
       </StyledInfosContainer>
+      <i onClick={cancelSchedule} className="fa-solid fa-circle-xmark CloseButton"></i>
     </StyledContainer>
   );
 };

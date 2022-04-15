@@ -62,7 +62,7 @@ const DashboardPage = () => {
       <FixInScreen>
         <PatientsContainer>
           {treatements.map((elm, i) => (
-            <AppointmentsCard key={i} {...elm} />
+            <AppointmentsCard refreshAppointments={() => getTreatments()} key={i} data={elm} />
           ))}
         </PatientsContainer>
       </FixInScreen>

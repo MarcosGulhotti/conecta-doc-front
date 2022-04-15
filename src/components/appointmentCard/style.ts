@@ -14,6 +14,20 @@ const StyledContainer = styled.div`
   background-color: var(--white);
 
   display: flex;
+
+  i {
+    color: #cc3e36;
+    font-size: 20px;
+
+    width: 40px;
+
+    height: 20px;
+
+    margin-top: 6px;
+    margin-right: 6px;
+
+    cursor: pointer;
+  }
 `;
 
 const StyledDateContainer = styled.div`

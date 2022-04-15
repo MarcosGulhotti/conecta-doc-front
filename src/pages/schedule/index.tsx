@@ -96,12 +96,12 @@ const SchedulePage = () => {
             appointmentsMonth === [] ? (
               <img src={noData} alt="No Data Image" />
             ) : (
-              appointmentsMonth.map((elm, i) => <AppointmentsCard key={i} {...elm} />)
+              appointmentsMonth.map((elm, i) => <AppointmentsCard refreshAppointments={() => getTreatments()} key={i} data={elm} />)
             )
           ) : appointmentsWeek === [] ? (
             <img src={noData} alt="No Data Image" />
           ) : (
-            appointmentsWeek.map((elm, i) => <AppointmentsCard key={i} {...elm} />)
+            appointmentsWeek.map((elm, i) => <AppointmentsCard refreshAppointments={() => getTreatments()} key={i} data={elm} />)
           )}
         </PatientsContainer>
       </FixInScreen>
